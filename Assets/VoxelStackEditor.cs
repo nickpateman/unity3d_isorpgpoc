@@ -7,7 +7,7 @@ using UnityEngine;
 [CustomEditor(typeof(VoxelStack)), CanEditMultipleObjects]
 public class VoxelStacklEditor : Editor
 {
-    private int _selectedVoxelPrefabIndex;
+    private static int _selectedVoxelPrefabIndex;
 
     public override void OnInspectorGUI()
     {

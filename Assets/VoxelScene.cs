@@ -1,5 +1,7 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class VoxelScene : MonoBehaviour
@@ -20,7 +22,27 @@ public class VoxelScene : MonoBehaviour
         }
     }
 
-    public void Save()
+    public void Load(JObject json)
+    {
+        var stacksJson = json["Stacks"].Value<JArray>();
+        var stacksList = JsonConvert.DeserializeObject<List<string>>(stacksJson.ToString());
+        var voxelStacks = GetComponentsInChildren<VoxelStack>().ToList();
+        foreach (var curVoxelStack in voxelStacks)
+        {
+            curVoxelStack.Clear();
+            var stack = stacksList.Single(x => x.StartsWith($"({curVoxelStack.transform.name})"));
+            var stackKeys = stack.Split('-')[1].Trim(new char[] { '[', ']' }).Split(',');
+            foreach(var curKey in stackKeys)
+            {
+                if(!string.IsNullOrEmpty(curKey))
+                {
+                    curVoxelStack.Raise(curKey);
+                }
+            }
+        }
+    }
+
+    public JObject Save()
     {
         JObject json = new JObject();
         json.Add("Name", new JValue(Name));
@@ -33,6 +55,6 @@ public class VoxelScene : MonoBehaviour
         }
 
         json.Add("Stacks", stacks);
-        var jsonString = json.ToString(Newtonsoft.Json.Formatting.Indented, null);
+        return json;
     }
 }

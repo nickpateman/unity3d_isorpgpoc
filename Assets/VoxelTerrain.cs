@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,11 +9,13 @@ public class VoxelTerrain : MonoBehaviour
     [SerializeField] int SceneWidth = 10;
     [SerializeField] int SceneDepth = 10;
     public VoxelPrefab[] VoxelPrefabs;
+    [SerializeField] DefaultAsset DataFile;
 
     private List<GameObject> _voxelStackParents = new List<GameObject>();
 
     private void Start()
     {
+        
     }
 
     private void Update()
@@ -107,5 +110,49 @@ public class VoxelTerrain : MonoBehaviour
             new Vector3(-4.5f, 0.5f, -4.5f));
         var voxelScene = scene.AddComponent<VoxelScene>();
         scene.transform.parent = transform;
+    }
+
+    public void Reload()
+    {
+        string assetPath = AssetDatabase.GetAssetPath(DataFile.GetInstanceID());
+        var jsonData = System.IO.File.ReadAllText(assetPath);
+        var json = JObject.Parse(jsonData);
+        Destroy();
+
+        var scenesJson = json["Scenes"].Value<JArray>();
+        foreach(var curSceneJson in scenesJson)
+        {
+            var scene = CreateScene(
+                curSceneJson["Name"].Value<string>(),
+                new Vector3(-4.5f, 0.5f, -4.5f));
+            var voxelScene = scene.AddComponent<VoxelScene>();
+            scene.transform.parent = transform;
+            voxelScene.Load((JObject)curSceneJson);
+        }
+    }
+
+    public void SaveAs()
+    {
+        var json = new JObject();
+        var scenes = new JArray();
+        var voxelScenes = GetComponentsInChildren<VoxelScene>();
+        foreach(var curVoxelScene in voxelScenes)
+        {
+            scenes.Add(curVoxelScene.Save());
+        }
+        json.Add("Scenes", scenes);
+
+        var path = EditorUtility.SaveFilePanel(
+            "Save world data",
+            "",
+            "data.json",
+            "json");
+
+        if (path.Length != 0)
+        {
+            System.IO.File.WriteAllText(
+                path,
+                json.ToString(Newtonsoft.Json.Formatting.Indented));
+        }
     }
 }

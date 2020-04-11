@@ -83,7 +83,7 @@ public class VoxelStack : MonoBehaviour
     }
 
     public string ToKeyString()
-    {
-        return string.Join(",", _prefabKeys.ToArray());
+    {        
+        return string.Join(",", _prefabKeys.Reverse().ToArray());
     }
 }

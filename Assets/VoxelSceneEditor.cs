@@ -17,12 +17,5 @@ public class VoxelSceneEditor : Editor
                 voxelScene.Flatten();
             }
         }
-
-        if (GUILayout.Button("Save"))
-        {
-            var voxelScenne = target as VoxelScene;
-            voxelScenne.Save();
-            return;
-        }
     }
 }

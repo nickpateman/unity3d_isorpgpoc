@@ -20,6 +20,20 @@ public class VoxelTerrainEditor : Editor
             voxelTerrain.Rebuild();
             return;
         }
+
+        if (GUILayout.Button("Reload"))
+        {
+            var voxelTerrain = target as VoxelTerrain;
+            voxelTerrain.Reload();
+            return;
+        }
+
+        if (GUILayout.Button("Save As..."))
+        {
+            var voxelTerrain = target as VoxelTerrain;
+            voxelTerrain.SaveAs();
+            return;
+        }
     }
 
 

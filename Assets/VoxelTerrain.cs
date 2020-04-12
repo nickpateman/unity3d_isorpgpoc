@@ -10,7 +10,7 @@ public class VoxelTerrain : MonoBehaviour
     [SerializeField] int SceneWidth = 10;
     [SerializeField] int SceneDepth = 10;
     public VoxelPrefab[] VoxelPrefabs;
-    [SerializeField] DefaultAsset DataFile;
+    public DefaultAsset DataFile;
 
     private List<GameObject> _voxelStackParents = new List<GameObject>();
 
@@ -96,11 +96,15 @@ public class VoxelTerrain : MonoBehaviour
 
     public void Destroy()
     {
+        var destroy = new List<Transform>();
         foreach (Transform child in transform)
         {
-            Debug.Log($"Destroying '{child.name}'.");
-            child.gameObject.transform.parent = null;
-            GameObject.DestroyImmediate(child.gameObject);
+            destroy.Add(child);
+        }
+        foreach(var curDestroy in destroy)
+        {
+            Debug.Log($"Destroying '{curDestroy.name}'.");
+            GameObject.DestroyImmediate(curDestroy.gameObject);
         }
 
         _voxelStackParents.Clear();
@@ -148,6 +152,24 @@ public class VoxelTerrain : MonoBehaviour
             var worldLocationOffset = new Vector3(voxelScene.WorldLocation.x * SceneWidth, 0, voxelScene.WorldLocation.y * SceneDepth);
             scene.transform.position = worldLocationOffset;
         }
+    }
+
+    public void Save()
+    {
+        if(DataFile != null)
+        {
+            var json = new JObject();
+            var scenes = new JArray();
+            var voxelScenes = GetComponentsInChildren<VoxelScene>();
+            foreach (var curVoxelScene in voxelScenes)
+            {
+                scenes.Add(curVoxelScene.Save());
+            }
+            json.Add("Scenes", scenes);
+
+            string assetPath = AssetDatabase.GetAssetPath(DataFile.GetInstanceID());
+            System.IO.File.WriteAllText(assetPath, json.ToString(Newtonsoft.Json.Formatting.Indented));
+        }     
     }
 
     public void SaveAs()

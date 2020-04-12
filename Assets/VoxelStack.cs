@@ -50,7 +50,7 @@ public class VoxelStack : MonoBehaviour
         curVoxel.name = "Voxel";
         curVoxel.transform.parent = transform;
         curVoxel.transform.localPosition = offsetLocation;
-        curVoxel.hideFlags = HideFlags.HideInHierarchy;
+        curVoxel.hideFlags = HideFlags.HideInHierarchy | HideFlags.DontSave;
         _voxels.Push(curVoxel);
         _prefabKeys.Push(prefabKey);
 

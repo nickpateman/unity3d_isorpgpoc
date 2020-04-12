@@ -15,7 +15,8 @@ public class VoxelTerrain : MonoBehaviour
 
     private void Start()
     {
-        
+        Destroy();
+        Reload();
     }
 
     private void Update()
@@ -31,10 +32,10 @@ public class VoxelTerrain : MonoBehaviour
 
     private void OnEnable()
     {
-        SceneView.beforeSceneGui += OnScene;
+        SceneView.beforeSceneGui += OnBeforeSceneGui;
     }
 
-    void OnScene(SceneView scene)
+    void OnBeforeSceneGui(SceneView scene)
     {
         Event e = Event.current;
 
@@ -69,6 +70,7 @@ public class VoxelTerrain : MonoBehaviour
         Vector3 offset)
     {
         var scene = new GameObject(name);
+        scene.hideFlags = HideFlags.DontSave;
         for(int curX = 0; curX < SceneWidth; curX++)
         {
             for(int curZ = 0; curZ < SceneDepth; curZ++)

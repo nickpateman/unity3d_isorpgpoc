@@ -1,7 +1,7 @@
 {
   "Scenes": [
     {
-      "Name": null,
+      "Name": "default",
       "Stacks": [
         "([x=0,z=0])-[grass,grass,rock,rock]",
         "([x=0,z=1])-[]",

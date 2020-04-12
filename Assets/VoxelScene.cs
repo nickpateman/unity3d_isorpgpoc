@@ -9,9 +9,91 @@ public class VoxelScene : MonoBehaviour
     public string Name = "New Scene";
     public Vector2 WorldLocation = new Vector2(0, 0);
 
+    private VoxelTerrain _parentTerrain;
+
     private void Reset()
     {
         Flatten();
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        var parentTerrain = GetParentTerrain();
+        if(parentTerrain != null)
+        {
+            Gizmos.color = Color.blue;
+            if(GetTopScene() == null) Gizmos.DrawSphere(transform.position + new Vector3(0, 0, 10.0f), 0.5f);
+            if (GetLeftScene() == null) Gizmos.DrawSphere(transform.position + new Vector3(-10.0f, 0, 0), 0.5f);
+            if (GetBottomScene() == null) Gizmos.DrawSphere(transform.position + new Vector3(0, 0, -10.0f), 0.5f);
+            if (GetRightScene() == null) Gizmos.DrawSphere(transform.position + new Vector3(10.0f, 0, 0), 0.5f);
+        }
+    }
+
+    public VoxelScene GetTopScene()
+    {
+        var parentTerrain = GetParentTerrain();
+        if (parentTerrain != null)
+        {
+            return parentTerrain.GetSceneAtLocation(WorldLocation + new Vector2(0, 1));
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public VoxelScene GetLeftScene()
+    {
+        var parentTerrain = GetParentTerrain();
+        if (parentTerrain != null)
+        {
+            return parentTerrain.GetSceneAtLocation(WorldLocation + new Vector2(-1, 0));
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public VoxelScene GetBottomScene()
+    {
+        var parentTerrain = GetParentTerrain();
+        if (parentTerrain != null)
+        {
+            return parentTerrain.GetSceneAtLocation(WorldLocation + new Vector2(0, -1));
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public VoxelScene GetRightScene()
+    {
+        var parentTerrain = GetParentTerrain();
+        if (parentTerrain != null)
+        {
+            return parentTerrain.GetSceneAtLocation(WorldLocation + new Vector2(1, 0));
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private VoxelTerrain GetParentTerrain()
+    {
+        if(_parentTerrain != null)
+        {
+            return _parentTerrain;
+        }
+
+        if(transform.parent != null)
+        {
+            _parentTerrain = transform.parent.GetComponent<VoxelTerrain>();
+        }
+
+        return _parentTerrain;
     }
 
     public void Flatten()
@@ -64,4 +146,5 @@ public class VoxelScene : MonoBehaviour
         json.Add("Stacks", stacks);
         return json;
     }
+
 }

@@ -17,5 +17,29 @@ public class VoxelSceneEditor : Editor
                 voxelScene.Flatten();
             }
         }
+
+        if(targets != null && targets.Length == 1)
+        {
+            var voxelScene = target as VoxelScene;
+            if (voxelScene.GetTopScene() == null && GUILayout.Button("Add Scene to Top"))
+            {
+
+            }
+
+            if (voxelScene.GetLeftScene() == null && GUILayout.Button("Add Scene to Left"))
+            {
+
+            }
+
+            if (voxelScene.GetBottomScene() == null && GUILayout.Button("Add Scene to Bottom"))
+            {
+
+            }
+
+            if (voxelScene.GetRightScene() == null && GUILayout.Button("Add Scene to Right"))
+            {
+
+            }
+        }
     }
 }

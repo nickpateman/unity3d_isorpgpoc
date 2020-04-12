@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -159,5 +160,11 @@ public class VoxelTerrain : MonoBehaviour
                 path,
                 json.ToString(Newtonsoft.Json.Formatting.Indented));
         }
+    }
+
+    public VoxelScene GetSceneAtLocation(Vector2 worldLocation)
+    {
+        var voxelScenes = GetComponentsInChildren<VoxelScene>();
+        return voxelScenes.SingleOrDefault(x => x.WorldLocation == worldLocation);
     }
 }

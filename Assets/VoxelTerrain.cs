@@ -115,6 +115,19 @@ public class VoxelTerrain : MonoBehaviour
         scene.transform.parent = transform;
     }
 
+    public void AddScene(Vector2 worldLocation)
+    {
+        var scene = CreateScene(
+            "New Scene",
+            new Vector3(-4.5f, 0.5f, -4.5f));
+        var voxelScene = scene.AddComponent<VoxelScene>();
+        voxelScene.WorldLocation = worldLocation;
+        scene.transform.parent = transform;
+
+        var worldLocationOffset = new Vector3(voxelScene.WorldLocation.x * SceneWidth, 0, voxelScene.WorldLocation.y * SceneDepth);
+        scene.transform.position = worldLocationOffset;
+    }
+
     public void Reload()
     {
         string assetPath = AssetDatabase.GetAssetPath(DataFile.GetInstanceID());

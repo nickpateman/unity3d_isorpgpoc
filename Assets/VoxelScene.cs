@@ -81,7 +81,7 @@ public class VoxelScene : MonoBehaviour
         }
     }
 
-    private VoxelTerrain GetParentTerrain()
+    public VoxelTerrain GetParentTerrain()
     {
         if(_parentTerrain != null)
         {

@@ -130,6 +130,9 @@ public class VoxelTerrain : MonoBehaviour
             var voxelScene = scene.AddComponent<VoxelScene>();
             scene.transform.parent = transform;
             voxelScene.Load((JObject)curSceneJson);
+
+            var worldLocationOffset = new Vector3(voxelScene.WorldLocation.x * SceneWidth, 0, voxelScene.WorldLocation.y * SceneDepth);
+            scene.transform.position = worldLocationOffset;
         }
     }
 

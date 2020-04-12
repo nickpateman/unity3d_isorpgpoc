@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class VoxelScene : MonoBehaviour
 {
-    [SerializeField] string Name;
+    public string Name = "New Scene";
+    public Vector2 WorldLocation = new Vector2(0, 0);
 
     private void Reset()
     {
@@ -24,6 +25,11 @@ public class VoxelScene : MonoBehaviour
 
     public void Load(JObject json)
     {
+        Name = json["Name"].Value<string>();
+        var worldLocationParts = json["WorldLocation"].Value<string>().Split(',');
+        WorldLocation = new Vector2(
+            int.Parse(worldLocationParts[0]),
+            int.Parse(worldLocationParts[1]));
         var stacksJson = json["Stacks"].Value<JArray>();
         var stacksList = JsonConvert.DeserializeObject<List<string>>(stacksJson.ToString());
         var voxelStacks = GetComponentsInChildren<VoxelStack>().ToList();
@@ -46,6 +52,7 @@ public class VoxelScene : MonoBehaviour
     {
         JObject json = new JObject();
         json.Add("Name", new JValue(Name));
+        json.Add("WorldLocation", new JValue($"{WorldLocation.x},{WorldLocation.y}"));
         var stacks = new JArray();
         var voxelStacks = GetComponentsInChildren<VoxelStack>();
         foreach(var curVoxelStack in voxelStacks)

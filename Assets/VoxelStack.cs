@@ -10,16 +10,16 @@ public class VoxelStack : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        var sphereLocation = transform.localPosition;
         Gizmos.color = Color.red;
 
         if (_curHeight > 0)
         {
             Gizmos.DrawWireCube(
-                transform.localPosition + new Vector3(0, 0.5f * (_curHeight - 1), 0),
+                transform.position + new Vector3(0, 0.5f * (_curHeight - 1), 0),
                 new Vector3(1, _curHeight, 1));
         }
 
+        var sphereLocation = transform.position;
         sphereLocation += new Vector3(0, _curHeight, 0);
         Gizmos.DrawSphere(
             sphereLocation,

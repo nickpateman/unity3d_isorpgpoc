@@ -7,8 +7,8 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class VoxelTerrain : MonoBehaviour
 {
-    [SerializeField] int SceneWidth = 10;
-    [SerializeField] int SceneDepth = 10;
+    public int SceneWidth = 10;
+    public int SceneDepth = 10;
     public VoxelPrefab[] VoxelPrefabs;
     public DefaultAsset DataFile;
 

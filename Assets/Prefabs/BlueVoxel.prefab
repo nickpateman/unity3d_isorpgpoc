@@ -10,13 +10,23 @@ PrefabInstance:
     - target: {fileID: 493713572839677432, guid: 58e815c5fc4d2c343a066d48c1e28423,
         type: 3}
       propertyPath: m_Name
-      value: Voxel
+      value: BlueVoxel
       objectReference: {fileID: 0}
     - target: {fileID: 1019548849622907670, guid: 58e815c5fc4d2c343a066d48c1e28423,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 51e41dfe3e7c6a846b8ef7f9deec135c, type: 2}
+    - target: {fileID: 1019548849622907670, guid: 58e815c5fc4d2c343a066d48c1e28423,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1019548849622907670, guid: 58e815c5fc4d2c343a066d48c1e28423,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5679371604609811174, guid: 58e815c5fc4d2c343a066d48c1e28423,
         type: 3}
       propertyPath: m_LocalPosition.x

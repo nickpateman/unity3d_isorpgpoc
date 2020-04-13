@@ -40,9 +40,9 @@ public class VoxelWorld : MonoBehaviour
             if(nextScene != null)
             {
                 var worldLocationOffset = new Vector3(nextScene.WorldLocation.x * _parentTerrain.SceneWidth, 0, nextScene.WorldLocation.y * _parentTerrain.SceneDepth);
-                var cameraPosition = new Vector3(0, 12f, -10f);
+                var cameraOffset = new Vector3(0, 12f, -10f);
                 var cameraRotation = new Vector3(50.0f, 0, 0);
-                MainCamera.transform.position = cameraPosition + worldLocationOffset;
+                MainCamera.transform.position = cameraOffset + worldLocationOffset;
                 MainCamera.transform.rotation = Quaternion.Euler(cameraRotation);
 
                 _previousLocation = CurrentLocation;

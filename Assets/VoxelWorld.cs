@@ -37,13 +37,16 @@ public class VoxelWorld : MonoBehaviour
         if(!_previousLocation.HasValue || (_previousLocation != CurrentLocation))
         {
             var nextScene = _parentTerrain.GetSceneAtLocation(CurrentLocation);
-            var worldLocationOffset = new Vector3(nextScene.WorldLocation.x * _parentTerrain.SceneWidth, 0, nextScene.WorldLocation.y * _parentTerrain.SceneDepth);
-            var cameraPosition = new Vector3(0, 12f, -10f);
-            var cameraRotation = new Vector3(50.0f, 0, 0);
-            MainCamera.transform.position = cameraPosition + worldLocationOffset;
-            MainCamera.transform.rotation = Quaternion.Euler(cameraRotation);
+            if(nextScene != null)
+            {
+                var worldLocationOffset = new Vector3(nextScene.WorldLocation.x * _parentTerrain.SceneWidth, 0, nextScene.WorldLocation.y * _parentTerrain.SceneDepth);
+                var cameraPosition = new Vector3(0, 12f, -10f);
+                var cameraRotation = new Vector3(50.0f, 0, 0);
+                MainCamera.transform.position = cameraPosition + worldLocationOffset;
+                MainCamera.transform.rotation = Quaternion.Euler(cameraRotation);
 
-            _previousLocation = CurrentLocation;
+                _previousLocation = CurrentLocation;
+            }
         }
     }
 }

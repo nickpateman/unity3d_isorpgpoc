@@ -40,8 +40,10 @@ public class VoxelWorld : MonoBehaviour
             if(nextScene != null)
             {
                 var worldLocationOffset = new Vector3(nextScene.WorldLocation.x * _parentTerrain.SceneWidth, 0, nextScene.WorldLocation.y * _parentTerrain.SceneDepth);
-                var cameraOffset = new Vector3(0, 12f, -10f);
-                var cameraRotation = new Vector3(50.0f, 0, 0);
+                var cameraOffset = new Vector3(0, 13f, -9.5f);
+                var cameraRotation = new Vector3(49.0f, 0, 0);
+                MainCamera.orthographic = true;
+                MainCamera.orthographicSize = 4;
                 MainCamera.transform.position = cameraOffset + worldLocationOffset;
                 MainCamera.transform.rotation = Quaternion.Euler(cameraRotation);
 

@@ -266,8 +266,8 @@ Camera:
   near clip plane: 0.01
   far clip plane: 1000
   field of view: 41.9
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -290,13 +290,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.41493142, y: 0, z: 0, w: 0.9098527}
-  m_LocalPosition: {x: 0, y: 12.33, z: -10}
+  m_LocalRotation: {x: 0.41469327, y: 0, z: 0, w: 0.9099613}
+  m_LocalPosition: {x: 0, y: 13, z: -9.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 49.03, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 49, y: 0, z: 0}
 --- !u!1 &1693301600
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +350,7 @@ MonoBehaviour:
   - Key: rock
     Prefab: {fileID: 812303864072877523, guid: aedeec0539598594f912fa2eba8ba4b5, type: 3}
   - Key: water
-    Prefab: {fileID: 7396742878894781108, guid: 54d461dbe684ea84c8f45386979d982f,
+    Prefab: {fileID: 5097428625200098900, guid: 59a06600cbd7dc443a7fe430222027f2,
       type: 3}
   DataFile: {fileID: 102900000, guid: dccbd20bb76bcf445b65f9e1aaa85ebc, type: 3}
 --- !u!114 &1693301603
@@ -366,4 +366,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 963194227}
-  CurrentLocation: {x: 0, y: 0}
+  CurrentLocation: {x: 1, y: 0}

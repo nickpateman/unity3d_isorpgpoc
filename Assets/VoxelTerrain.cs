@@ -202,4 +202,5 @@ public class VoxelTerrain : MonoBehaviour
         var voxelScenes = GetComponentsInChildren<VoxelScene>();
         return voxelScenes.SingleOrDefault(x => x.WorldLocation == worldLocation);
     }
+
 }

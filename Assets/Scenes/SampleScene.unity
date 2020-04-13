@@ -352,6 +352,9 @@ MonoBehaviour:
   - Key: water
     Prefab: {fileID: 5097428625200098900, guid: 59a06600cbd7dc443a7fe430222027f2,
       type: 3}
+  - Key: sand
+    Prefab: {fileID: 2422971922960436594, guid: 5daaacf641d507d4096acee2dc790333,
+      type: 3}
   DataFile: {fileID: 102900000, guid: dccbd20bb76bcf445b65f9e1aaa85ebc, type: 3}
 --- !u!114 &1693301603
 MonoBehaviour:
@@ -366,4 +369,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 963194227}
-  CurrentLocation: {x: 1, y: 0}
+  CurrentLocation: {x: 0, y: 0}

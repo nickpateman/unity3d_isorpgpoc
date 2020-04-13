@@ -58,7 +58,17 @@ public class VoxelTerrain : MonoBehaviour
                     var voxelStack = parent.transform.GetComponent<VoxelStack>();
                     if (voxelStack != null)
                     {
-                        Selection.SetActiveObjectWithContext(parent.gameObject, null);
+                        if(e.shift)
+                        {
+                            var prevSelection = Selection.gameObjects.ToList();
+                            prevSelection.Add(parent.gameObject);
+                            Selection.objects = prevSelection.ToArray();
+                        }
+                        else
+                        {
+                            Selection.activeObject = parent.gameObject;
+                            //Selection.SetActiveObjectWithContext(parent.gameObject, null);
+                        }
                         e.Use();
                     }
                 }
